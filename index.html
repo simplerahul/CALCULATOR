@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+<style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizzing: border-box;
+    }
+    body {
+        background-color: skyblue;
+    }
+    #calc {
+        width: 110%;
+        height: 110vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #content {
+        background: #2c302cdd;
+        padding: 30px;
+        border-radius: 15 ;
+    }
+    #content form input {
+        border: 0;
+        outline: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        font-size:  15px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    #backspace {
+        background-colour: rgba(244, 238, 238, 0);
+        colour: white;
+    }
+    #res  {
+       padding: 10px;
+
+    }
+    #clear  {
+        background-color: rgb(227, 235, 235);
+        color: whitesmoke;
+    }
+    form #output {
+        display: flex;
+        justify-content: flex-end;
+        margin: 15px;
+    }
+    form #output input {
+        text-align: right;
+        flex: 1;
+        font-size: 26px;
+    }
+</style>
+<body>
+    <div id="calc">
+        <div id="content">
+            <form>
+                <div id="output">
+                    <input type="text" id='res' >
+                </div>
+                <div class="btn">
+                    <input type="button" value='C' onclick="Clear()" id="clear">
+                    <input type="button" value='← ' onclick="Back()"  id="backspace">
+                    <input type="button" value='%' onclick="Solve('%')">
+                    <input type="button" value='/' onclick="Solve('/')">
+                    <br>
+                    <input type="button" value='7' onclick="Solve('7')">
+                    <input type="button" value='8' onclick="Solve('8')">
+                    <input type="button" value='9' onclick="Solve('9')">
+                    <input type="button" value='X' onclick="Solve('*')">
+                    <br>
+                    <input type="button" value='4' onclick="Solve('4')">
+                    <input type="button" value='5' onclick="Solve('5')">
+                    <input type="button" value='6' onclick="Solve('6')">
+                    <input type="button" value='-' onclick="Solve('-')">
+                    <br>
+                    <input type="button" value='1' onclick="Solve('1')">
+                    <input type="button" value='2' onclick="Solve('2')">
+                    <input type="button" value='3' onclick="Solve('3')">
+                    <input type="button" value='+' onclick="Solve('+')">
+                    <br>
+                    <input type="button" value='00' onclick="Solve('00')">
+                    <input type="button" value='0' onclick="Solve('0')">
+                    <input type="button" value='.' onclick="Solve('.')">
+                    <input type="button" value='=' onclick="Result()">
+                </div>
+            </form>
+         </div>
+    </div>
+    <script>
+        function Clear()  {
+            document.getElementById('res').value = ' ';
+        }
+
+        function Back()  {
+            let currentValue = document.getElementById('res').value;
+            document.getElementById('res').value = currentValue.slice(0, -1);
+        }
+        function Solve(value)  {
+            document.getElementById('res').value += value;
+        }
+        function Result() {
+            let expansion = document.getElementById('res').value
+
+            expansion = expansion.replace(/x/g, '*');
+
+            if  (expansion.include('/0'))  {
+                document.getElementById('res').value = 'Error';
+            } else { 
+                let result = eval(expansion);
+                if (typeof result === 'number' && !isNaN(result))  {
+                    document.getElementById('res').value = result;
+                } else {
+                    document.getElementById('res').value = 'Error';
+                }
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>
